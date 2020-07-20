@@ -9,6 +9,28 @@
 
 	<meta name = "viewport" content = "width-device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
 
+	<script type="text/javascript">
+		const user = '{{request.user}}';
+
+		function getToken(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+	}
+	const csrftoken = getToken('csrftoken');
+
+	</script>
+
 </head>
 <body>
 
@@ -29,6 +51,7 @@
 	      <a href = "{% url 'cart' %}">
 	      	<img id='cart-icon' src="{% static 'images/cart.png' %}" />
 	      </a>
+	      <p id = "cart-total">{{cartItems}}</p>
 	    </div>
 	  </div>
 	</nav>
@@ -46,5 +69,6 @@
 
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
+	<script type="text/javascript" src = "{% static 'js/cart.js' %}"></script>
 </body>
 </html>
