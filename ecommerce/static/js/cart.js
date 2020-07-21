@@ -17,7 +17,7 @@ Array.prototype.forEach.call(updateBtns,item => {
 updateUserOrder = (productId, action) => {
 	console.log('access')
 
-	let url = 'update/';
+	let url = '/update/';
 
 	fetch(url, {
 		method: 'POST',
