@@ -13,7 +13,7 @@ class Customer(models.Model):
 
 class Product(models.Model):
 	name = models.CharField(max_length=200)
-	price = models.FloatField()
+	price = models.DecimalField(max_digits = 10, decimal_places=2)
 	digital = models.BooleanField(default=False,null=True,blank=False)
 	image = models.ImageField(null=True,blank=True)
 	
@@ -53,7 +53,7 @@ class Order(models.Model):
 	def getCartTotal(self):
 		orderitems = self.orderitem_set.all()
 		total = sum([item.getTotal for item in orderitems])
-		return total
+		return float(total)
 
 	@property
 	def getCartQuantity(self):
